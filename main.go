@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"gortfolio/config"
 	"gortfolio/models"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,14 +12,17 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	fmt.Println(models.DbConnection)
-	data := "test"
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "index.html", gin.H{"data": data})
+	router.GET("/", func(c *gin.Context) {
+		people := models.Get_all()
+		c.HTML(200, "index.html", gin.H{"people": people})
 	})
-	// router.POST("/post", func(ctx *gin.Context) {
-	// 	ctx.HTML(200, "index.html", gin.H{"data": data})
-	// })
+
+	router.POST("/new", func(c *gin.Context) {
+		name := c.PostForm("name")
+		age, _ := strconv.Atoi(c.PostForm("age"))
+		models.Create(name, age)
+		c.Redirect(302, "/")
+	})
 
 	_ = router.Run(":" + config.Config.Port)
 }
