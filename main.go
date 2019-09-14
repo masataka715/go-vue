@@ -3,12 +3,15 @@ package main
 import (
 	"gortfolio/config"
 	"gortfolio/models"
+	"gortfolio/utils"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	utils.LoggingSettings(config.Config.LogFile)
+
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 	models.Init()

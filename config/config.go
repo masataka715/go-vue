@@ -11,6 +11,7 @@ type ConfigList struct {
 	DbName    string
 	SQLDriver string
 	Port      string
+	LogFile   string
 }
 
 var Config ConfigList
@@ -25,7 +26,7 @@ func init() {
 	Config = ConfigList{
 		DbName:    cfg.Section("db").Key("name").String(),
 		SQLDriver: cfg.Section("db").Key("driver").String(),
-		// Port:      cfg.Section("web").Key("port").MustInt(),
-		Port: cfg.Section("web").Key("port").String(),
+		Port:      cfg.Section("web").Key("port").String(),
+		LogFile:   cfg.Section("log").Key("file_name").String(),
 	}
 }
