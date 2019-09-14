@@ -3,6 +3,7 @@ package main
 import (
 	"gortfolio/config"
 	"gortfolio/models"
+	"gortfolio/shiritori"
 	"gortfolio/utils"
 	"strconv"
 
@@ -19,8 +20,14 @@ func main() {
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
 		todos := models.GetAll()
+
+		lastLetter, _ := ctx.Cookie("lastLetter")
+		shiritoriMessage, _ := ctx.Cookie("shiritoriMessage")
+
 		ctx.HTML(200, "index.html", gin.H{
-			"todos": todos,
+			"todos":            todos,
+			"lastLetter":       lastLetter,
+			"shiritoriMessage": shiritoriMessage,
 		})
 	})
 
@@ -76,7 +83,17 @@ func main() {
 		}
 		models.Delete(id)
 		ctx.Redirect(302, "/")
+	})
 
+	//しりとり
+	router.POST("/shiritori", func(ctx *gin.Context) {
+		shiritoriWord := ctx.PostForm("shiritoriWord")
+		lastLetter, message := shiritori.Judge(ctx, shiritoriWord)
+		if lastLetter != "" {
+			ctx.SetCookie("lastLetter", lastLetter, 30, "/", "localhost", false, true)
+		}
+		ctx.SetCookie("shiritoriMessage", message, 30, "/", "localhost", false, true)
+		ctx.Redirect(302, "/")
 	})
 
 	_ = router.Run(":" + config.Config.Port)
