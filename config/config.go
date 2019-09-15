@@ -8,9 +8,11 @@ import (
 )
 
 type ConfigList struct {
+	Port      string
+	GoUrl     string
+	VueUrl    string
 	DbName    string
 	SQLDriver string
-	Port      string
 	LogFile   string
 }
 
@@ -24,9 +26,11 @@ func init() {
 	}
 
 	Config = ConfigList{
+		Port:      cfg.Section("web").Key("port").String(),
+		GoUrl:     cfg.Section("web").Key("go_url").String(),
+		VueUrl:    cfg.Section("web").Key("vue_url").String(),
 		DbName:    cfg.Section("db").Key("name").String(),
 		SQLDriver: cfg.Section("db").Key("driver").String(),
-		Port:      cfg.Section("web").Key("port").String(),
 		LogFile:   cfg.Section("log").Key("file_name").String(),
 	}
 }

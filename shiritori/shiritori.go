@@ -6,7 +6,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Judge(ctx *gin.Context, word string) (string, string) {
+func Shiritori(router *gin.Engine) {
+	//しりとり
+	router.POST("/shiritori", func(ctx *gin.Context) {
+		shiritoriWord := ctx.PostForm("shiritoriWord")
+		lastLetter, message := judge(ctx, shiritoriWord)
+		if lastLetter != "" {
+			ctx.SetCookie("lastLetter", lastLetter, 30, "/", "localhost", false, true)
+		}
+		ctx.SetCookie("shiritoriMessage", message, 30, "/", "localhost", false, true)
+		ctx.Redirect(302, "/")
+	})
+}
+
+func judge(ctx *gin.Context, word string) (string, string) {
 	var message string
 	var lastLetter string
 	// 平仮名かどうかの判断
