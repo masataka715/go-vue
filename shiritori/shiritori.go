@@ -42,6 +42,14 @@ func VueAndGo(router *gin.Engine) {
 func judge(ctx *gin.Context, word string, correctFirstLetter string) (string, string) {
 	var message string
 	var lastLetter string
+	wordRune := []rune(word)
+	firstLetter := string(wordRune[0])
+
+	// OnlyGoでは必要
+	// correctFirstLetter, _ := ctx.Cookie("lastLetter")
+	if correctFirstLetter == "" {
+		correctFirstLetter = "り"
+	}
 	// 平仮名かどうかの判断
 	whiteList := []string{
 		"あ", "い", "う", "え", "お",
@@ -72,28 +80,22 @@ func judge(ctx *gin.Context, word string, correctFirstLetter string) (string, st
 	}
 	if flag != utf8.RuneCountInString(word) {
 		message = "平仮名で入力して下さい"
+		lastLetter = correctFirstLetter
 		return lastLetter, message
 	}
 
-	wordRune := []rune(word)
-	firstLetter := string(wordRune[0])
-
-	// OnlyGoでは必要
-	// correctFirstLetter, _ := ctx.Cookie("lastLetter")
-	if correctFirstLetter == "" {
-		correctFirstLetter = "り"
-	}
 	// 最初の文字が合っているかの判断
 	if firstLetter != correctFirstLetter {
 		message = "最初の文字が違います"
+		lastLetter = correctFirstLetter
 		return lastLetter, message
 	}
 	// 最後の文字が「ん」かどうかの判断
 	size := len(wordRune)
 	lastLetter = string(wordRune[size-1])
 	if lastLetter == "ん" {
-		message = "最後が「ん」で終わっています"
-		return lastLetter, message
+		message = "最後が「ん」なのでゲームオーバー！　また「り」からです"
+		return "り", message
 	}
 
 	return lastLetter, message

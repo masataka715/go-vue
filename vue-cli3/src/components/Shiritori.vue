@@ -32,6 +32,7 @@ export default {
         .post(this.goUrl, json)
         .then(res => {
           this.shiritori = res.data;
+          this.shiritori.word = "";
         })
         .catch(err => {
           console.log(err);
