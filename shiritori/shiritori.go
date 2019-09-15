@@ -1,16 +1,23 @@
 package shiritori
 
 import (
+	"gortfolio/config"
+	"log"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
 )
 
-func Shiritori(router *gin.Engine) {
-	//しりとり
+type Shiritori struct {
+	Word       string `json:"word"`
+	LastLetter string `json:"lastLetter"`
+	Message    string `json:"message"`
+}
+
+func OnlyGo(router *gin.Engine) {
 	router.POST("/shiritori", func(ctx *gin.Context) {
 		shiritoriWord := ctx.PostForm("shiritoriWord")
-		lastLetter, message := judge(ctx, shiritoriWord)
+		lastLetter, message := judge(ctx, shiritoriWord, "test")
 		if lastLetter != "" {
 			ctx.SetCookie("lastLetter", lastLetter, 30, "/", "localhost", false, true)
 		}
@@ -19,7 +26,20 @@ func Shiritori(router *gin.Engine) {
 	})
 }
 
-func judge(ctx *gin.Context, word string) (string, string) {
+func VueAndGo(router *gin.Engine) {
+	router.POST("/shiri", func(ctx *gin.Context) {
+		var s Shiritori
+		err := ctx.BindJSON(&s)
+		if err != nil {
+			log.Println(err)
+		}
+		s.LastLetter, s.Message = judge(ctx, s.Word, s.LastLetter)
+		ctx.Header("Access-Control-Allow-Origin", config.Config.VueUrl)
+		ctx.JSON(200, s)
+	})
+}
+
+func judge(ctx *gin.Context, word string, correctFirstLetter string) (string, string) {
 	var message string
 	var lastLetter string
 	// 平仮名かどうかの判断
@@ -58,7 +78,8 @@ func judge(ctx *gin.Context, word string) (string, string) {
 	wordRune := []rune(word)
 	firstLetter := string(wordRune[0])
 
-	correctFirstLetter, _ := ctx.Cookie("lastLetter")
+	// OnlyGoでは必要
+	// correctFirstLetter, _ := ctx.Cookie("lastLetter")
 	if correctFirstLetter == "" {
 		correctFirstLetter = "り"
 	}

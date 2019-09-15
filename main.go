@@ -21,7 +21,8 @@ func main() {
 	// VueとGoで作ったToDo機能
 	todo.VueAndGo(router)
 	//しりとり
-	shiritori.Shiritori(router)
+	shiritori.OnlyGo(router)
+	shiritori.VueAndGo(router)
 
 	_ = router.Run(":" + config.Config.Port)
 

@@ -1,23 +1,20 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <Test/> -->
     <Todo/>
+    <Shiritori/>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import Test from './components/Test.vue'
 import Todo from './components/Todo.vue'
+import Shiritori from './components/Shiritori.vue'
 
 export default {
   name: 'app',
   components: {
-    // HelloWorld,
-    // Test,
     Todo,
+    Shiritori,
   }
 }
 </script>

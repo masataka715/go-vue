@@ -82,14 +82,14 @@ export default {
         status: "未実行"
       },
       todos: [],
-      url: "http://localhost:5000/todo",
+      goUrl: "http://localhost:5000/todo",
       editID: 0
     };
   },
 
   mounted: function() {
     axios
-      .get(this.url)
+      .get(this.goUrl)
       .then(res => {
         this.todos = res.data;
       })
@@ -100,10 +100,9 @@ export default {
 
   methods: {
     post() {
-      const url = "http://localhost:5000/todo";
       const json = JSON.stringify(this.todo);
       axios
-        .post(url, json)
+        .post(this.goUrl, json)
         .then(res => {
           this.todos = res.data;
         })
@@ -117,7 +116,7 @@ export default {
     editSubmit(todo) {
       const json = JSON.stringify(todo);
       axios
-        .post(this.url + "/edit/" + todo.ID, json)
+        .post(this.goUrl + "/edit/" + todo.ID, json)
         .then(res => {
           this.todos = res.data;
           this.editID = 0;
@@ -128,7 +127,7 @@ export default {
     },
     del(id) {
       axios
-        .post(this.url + "/delete/" + id)
+        .post(this.goUrl + "/delete/" + id)
         .then(res => {
           this.todos = res.data;
         })
