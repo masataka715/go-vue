@@ -35,6 +35,16 @@ func Router(router *gin.Engine) {
 		Delete(id)
 		submitJson(ctx)
 	})
+	// いいね
+	router.POST("/twitter/nice/:id", func(ctx *gin.Context) {
+		n := ctx.Param("id")
+		id, err := strconv.Atoi(n)
+		if err != nil {
+			log.Println(err)
+		}
+		AddNice(id)
+		submitJson(ctx)
+	})
 }
 
 func submitJson(ctx *gin.Context) {

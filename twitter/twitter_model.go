@@ -12,8 +12,15 @@ import (
 type Twitter struct {
 	ID        int       `json:"id"`
 	Content   string    `json:"content"`
+	NiceCount int       `json:"nice_count"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
+// type Nice struct {
+// 	ID       int `json:"id"`
+// 	Tweet_ID int `json:"tweet_id"`
+// 	Count    int `json:"count"`
+// }
 
 //DB初期化
 func Init() {
@@ -84,3 +91,15 @@ func GetAll() []Twitter {
 // 	db.Close()
 // 	return todo
 // }
+
+func AddNice(id int) {
+	db, err := gorm.Open(config.Config.SQLDriver, config.Config.DbName)
+	if err != nil {
+		log.Println(err)
+	}
+	var tweet Twitter
+	db.First(&tweet, id)
+	tweet.NiceCount++
+	db.Save(&tweet)
+	defer db.Close()
+}
