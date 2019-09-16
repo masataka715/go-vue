@@ -2,9 +2,9 @@ package main
 
 import (
 	"gortfolio/config"
-	"gortfolio/models"
 	"gortfolio/shiritori"
 	"gortfolio/todo"
+	"gortfolio/twitter"
 	"gortfolio/utils"
 
 	"github.com/gin-gonic/gin"
@@ -15,14 +15,16 @@ func main() {
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
-	models.Init()
-	// Goのみで作ったToDo機能
+	//todo
+	todo.Init()
 	todo.OnlyGo(router)
-	// VueとGoで作ったToDo機能
 	todo.VueAndGo(router)
 	//しりとり
 	shiritori.OnlyGo(router)
 	shiritori.VueAndGo(router)
+	// ツイッター
+	twitter.Init()
+	twitter.Router(router)
 
 	_ = router.Run(":" + config.Config.Port)
 

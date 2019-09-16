@@ -1,7 +1,6 @@
 package todo
 
 import (
-	"gortfolio/models"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +9,7 @@ import (
 func OnlyGo(router *gin.Engine) {
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
-		todos := models.GetAll()
+		todos := GetAll()
 
 		lastLetter, _ := ctx.Cookie("lastLetter")
 		shiritoriMessage, _ := ctx.Cookie("shiritoriMessage")
@@ -26,7 +25,7 @@ func OnlyGo(router *gin.Engine) {
 	router.POST("/new", func(ctx *gin.Context) {
 		text := ctx.PostForm("text")
 		status := ctx.PostForm("status")
-		models.Insert(text, status)
+		Insert(text, status)
 		ctx.Redirect(302, "/")
 	})
 
@@ -37,7 +36,7 @@ func OnlyGo(router *gin.Engine) {
 		if err != nil {
 			panic(err)
 		}
-		todo := models.GetOne(id)
+		todo := GetOne(id)
 		ctx.HTML(200, "detail.html", gin.H{"todo": todo})
 	})
 
@@ -50,7 +49,7 @@ func OnlyGo(router *gin.Engine) {
 		}
 		text := ctx.PostForm("text")
 		status := ctx.PostForm("status")
-		models.Update(id, text, status)
+		Update(id, text, status)
 		ctx.Redirect(302, "/")
 	})
 
@@ -61,7 +60,7 @@ func OnlyGo(router *gin.Engine) {
 		if err != nil {
 			panic("ERROR")
 		}
-		todo := models.GetOne(id)
+		todo := GetOne(id)
 		ctx.HTML(200, "delete.html", gin.H{"todo": todo})
 	})
 
@@ -72,7 +71,7 @@ func OnlyGo(router *gin.Engine) {
 		if err != nil {
 			panic("ERROR")
 		}
-		models.Delete(id)
+		Delete(id)
 		ctx.Redirect(302, "/")
 	})
 }

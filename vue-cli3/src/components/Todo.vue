@@ -27,7 +27,7 @@
         </tr>
       </tbody>
     </table>
-    <table class="table table-sm w-75 mx-auto bg-white">
+    <table class="table table-hover table-sm w-75 mx-auto bg-white">
       <thead>
         <tr>
           <th scope="col-2">内容</th>
@@ -41,10 +41,10 @@
           <!-- 編集フォーム -->
           <template v-if="editID == t.ID">
             <td>
-              <input v-model="t.Text" placeholder="入力してください" />
+              <input v-model="t.text" placeholder="入力してください" />
             </td>
             <td>
-              <select v-model="t.Status" name="status">
+              <select v-model="t.status" name="status">
                 <option value="未実行">未実行</option>
                 <option value="実行中">実行中</option>
                 <option value="終了">終了</option>
@@ -55,8 +55,8 @@
             </td>
           </template>
           <template v-else>
-            <td>{{ t.Text }}</td>
-            <td>{{ t.Status }}</td>
+            <td>{{ t.text }}</td>
+            <td>{{ t.status }}</td>
             <td>
               <button @click="showEditForm(t.ID)">編集</button>
             </td>
