@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="container">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <Battle/>
     <Twitter/>
     <Todo/>
     <Shiritori/>
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import Battle from './components/Battle.vue'
 import Twitter from './components/Twitter.vue'
 import Todo from './components/Todo.vue'
 import Shiritori from './components/Shiritori.vue'
@@ -15,6 +17,7 @@ import Shiritori from './components/Shiritori.vue'
 export default {
   name: 'app',
   components: {
+    Battle,
     Twitter,
     Todo,
     Shiritori,

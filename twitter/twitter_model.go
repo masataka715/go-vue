@@ -16,12 +16,6 @@ type Twitter struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// type Nice struct {
-// 	ID       int `json:"id"`
-// 	Tweet_ID int `json:"tweet_id"`
-// 	Count    int `json:"count"`
-// }
-
 //DB初期化
 func Init() {
 	db, err := gorm.Open(config.Config.SQLDriver, config.Config.DbName)

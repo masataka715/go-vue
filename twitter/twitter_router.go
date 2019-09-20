@@ -16,9 +16,7 @@ func Router(router *gin.Engine) {
 	// 新規保存
 	router.POST("/twitter", func(ctx *gin.Context) {
 		var t Twitter
-		log.Println(t)
 		err := ctx.BindJSON(&t)
-		log.Println(t)
 		if err != nil {
 			log.Println(err)
 		}

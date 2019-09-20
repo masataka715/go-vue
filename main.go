@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gortfolio/battle"
 	"gortfolio/config"
 	"gortfolio/shiritori"
 	"gortfolio/todo"
@@ -25,6 +26,8 @@ func main() {
 	// ツイッター
 	twitter.Init()
 	twitter.Router(router)
+	// 戦闘シーン
+	battle.Router(router)
 
 	_ = router.Run(":" + config.Config.Port)
 
