@@ -30,7 +30,7 @@
           <transition name="bounce">
             <p v-if="show">{{ message }}</p>
           </transition>
-            <p v-if="!show">{{ message }}</p>
+          <p v-if="!show">{{ message }}</p>
         </div>
         <!-- <p v-if="show">{{ message }}</p> -->
         <!-- <button @click="show = !show">Toggle show</button> -->
@@ -42,6 +42,7 @@
 <script>
 import axios from "axios";
 export default {
+  props: ["goDomain"],
   data() {
     return {
       member: {
@@ -51,7 +52,7 @@ export default {
       },
       enemy: "敵",
       message: "敵があらわれた！",
-      goUrl: "http://localhost:5000/battle",
+      goUrl: this.goDomain + "/battle",
       show: false
     };
   },

@@ -1,14 +1,14 @@
 package todo
 
 import (
-	"gortfolio/config"
-	"log"
-	"strconv"
+	"gortfolio/common"
+	"gortfolio/common/database"
 
 	"github.com/gin-gonic/gin"
 )
 
 func VueAndGo(router *gin.Engine) {
+	database.Migrate(Todo{})
 	// 一覧表示
 	router.GET("/todo", func(ctx *gin.Context) {
 		submitJson(ctx)
@@ -16,30 +16,20 @@ func VueAndGo(router *gin.Engine) {
 	// 新規保存
 	router.POST("/todo", func(ctx *gin.Context) {
 		var t Todo
-		err := ctx.BindJSON(&t)
-		if err != nil {
-			log.Println(err)
-		}
+		common.BindJSON(ctx, &t)
 		Insert(t.Text, t.Status)
 		submitJson(ctx)
 	})
 	// 編集
 	router.POST("/todo/edit/:id", func(ctx *gin.Context) {
 		var t Todo
-		err := ctx.BindJSON(&t)
-		if err != nil {
-			log.Println(err)
-		}
+		common.BindJSON(ctx, &t)
 		Update(t.ID, t.Text, t.Status)
 		submitJson(ctx)
 	})
 	// 削除
 	router.POST("/todo/delete/:id", func(ctx *gin.Context) {
-		n := ctx.Param("id")
-		id, err := strconv.Atoi(n)
-		if err != nil {
-			panic("ERROR")
-		}
+		id := common.GetQueryID(ctx)
 		Delete(id)
 		submitJson(ctx)
 	})
@@ -47,7 +37,5 @@ func VueAndGo(router *gin.Engine) {
 
 func submitJson(ctx *gin.Context) {
 	todos := GetAll()
-	// 別ドメインにアクセスする時に必要
-	ctx.Header("Access-Control-Allow-Origin", config.Config.VueUrl)
-	ctx.JSON(200, todos)
+	common.SubmitJson(ctx, todos)
 }

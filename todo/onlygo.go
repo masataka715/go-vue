@@ -1,12 +1,14 @@
 package todo
 
 import (
+	"gortfolio/common/database"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func OnlyGo(router *gin.Engine) {
+	database.Migrate(Todo{})
 	//Index
 	router.GET("/", func(ctx *gin.Context) {
 		todos := GetAll()

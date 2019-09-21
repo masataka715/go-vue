@@ -1,8 +1,8 @@
 package shiritori
 
 import (
+	"gortfolio/common"
 	"gortfolio/config"
-	"log"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
@@ -29,10 +29,7 @@ func OnlyGo(router *gin.Engine) {
 func VueAndGo(router *gin.Engine) {
 	router.POST("/shiri", func(ctx *gin.Context) {
 		var s Shiritori
-		err := ctx.BindJSON(&s)
-		if err != nil {
-			log.Println(err)
-		}
+		common.BindJSON(ctx, &s)
 		s.LastLetter, s.Message = judge(ctx, s.Word, s.LastLetter)
 		ctx.Header("Access-Control-Allow-Origin", config.Config.VueUrl)
 		ctx.JSON(200, s)

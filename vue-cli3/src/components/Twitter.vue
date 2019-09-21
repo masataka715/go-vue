@@ -23,7 +23,10 @@
       </button>
       <p>{{ t.content }}</p>
       <div class="text-center">
-        <button @click="nice(t.id)" class="badge badge-secondary">いいね <span>{{ t.nice_count }}</span></button>
+        <button @click="nice(t.id)" class="badge badge-secondary">
+          いいね
+          <span>{{ t.nice_count }}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -32,6 +35,7 @@
 <script>
 import axios from "axios";
 export default {
+  props: ["goDomain"],
   data() {
     return {
       twitter: {
@@ -40,7 +44,7 @@ export default {
         nice_count: 0
       },
       twitters: {},
-      goUrl: "http://localhost:5000/twitter"
+      goUrl: this.goDomain + "/twitter"
     };
   },
 
@@ -79,7 +83,7 @@ export default {
         });
     },
     nice(id) {
-        axios
+      axios
         .post(this.goUrl + "/nice/" + id)
         .then(res => {
           this.twitters = res.data;

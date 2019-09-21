@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gortfolio/auth"
 	"gortfolio/battle"
 	"gortfolio/config"
 	"gortfolio/shiritori"
@@ -17,15 +18,15 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 	//todo
-	todo.Init()
 	todo.OnlyGo(router)
 	todo.VueAndGo(router)
 	//しりとり
 	shiritori.OnlyGo(router)
 	shiritori.VueAndGo(router)
 	// ツイッター
-	twitter.Init()
 	twitter.Router(router)
+	// 認証
+	auth.Router(router)
 	// 戦闘シーン
 	battle.Router(router)
 
