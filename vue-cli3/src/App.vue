@@ -1,41 +1,33 @@
 <template>
   <div id="app" class="container">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <Battle :goDomain="goDomain"/>
-    <Auth :goDomain="goDomain"/>
-    <Twitter :goDomain="goDomain"/>
-    <Todo :goDomain="goDomain"/>
-    <Shiritori :goDomain="goDomain"/>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <router-link to="/" class="nav-item nav-link font-weight-bold">ホーム</router-link>
+        <router-link to="/game" class="nav-item nav-link font-weight-bold">ゲーム</router-link>
+        <router-link to="/tool" class="nav-item nav-link font-weight-bold">ツール</router-link>
+      </div>
+    </nav>
+    <!-- ここにパスと一致したコンポーネントが埋め込まれる -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import Battle from './components/Battle.vue'
-import Auth from './components/Auth.vue'
-import Twitter from './components/Twitter.vue'
-import Todo from './components/Todo.vue'
-import Shiritori from './components/Shiritori.vue'
-
 export default {
-  name: 'app',
-  components: {
-    Battle,
-    Auth,
-    Twitter,
-    Todo,
-    Shiritori,
-  },
+  name: "app",
+  components: {},
   data() {
-      return {
-          goDomain: "http://localhost:5000"
-      }
+    return {
+      goDomain: "http://localhost:5000"
+    };
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

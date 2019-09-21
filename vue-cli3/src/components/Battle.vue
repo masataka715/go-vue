@@ -1,39 +1,41 @@
 <template>
-  <div class="w-75 mx-auto my-4">
-    <h2>戦闘シーン</h2>
-    <div class="bg-dark">
-      <div>
-        <table class="table table-dark my-0 w-25 border border-white">
-          <tr>{{ member.name }}</tr>
-          <tr>HP：{{ member.hp }}</tr>
-          <tr>MP：{{ member.mp }}</tr>
-        </table>
-      </div>
-      <div class="p-4 m-4 text-white">敵</div>
-      <!-- コマンド -->
-      <div class="border border-white row">
-        <div class="col-4">
-          <table class="table table-dark my-0 border border-white">
-            <tr>
-              <button @click="battle()" class="btn btn-dark btn-block">たたかう</button>
-            </tr>
-            <tr>
-              <button @click="spell()" class="btn btn-dark btn-block">じゅもん</button>
-            </tr>
-            <tr>
-              <button @click="escape()" class="btn btn-dark btn-block">にげる</button>
-            </tr>
+  <div class="py-4 my-4" style="background-color:lavenderblush">
+    <div class="w-75 mx-auto">
+      <h2>戦闘シーン</h2>
+      <div class="bg-dark">
+        <div>
+          <table class="table table-dark my-0 w-25 border border-white">
+            <tr>{{ member.name }}</tr>
+            <tr>HP：{{ member.hp }}</tr>
+            <tr>MP：{{ member.mp }}</tr>
           </table>
         </div>
-        <!-- バトルメッセージ -->
-        <div class="col-8 mt-2 text-left text-white">
-          <transition name="bounce">
-            <p v-if="show">{{ message }}</p>
-          </transition>
-          <p v-if="!show">{{ message }}</p>
+        <div class="p-4 m-4 text-white">敵</div>
+        <!-- コマンド -->
+        <div class="border border-white row">
+          <div class="col-4">
+            <table class="table table-dark my-0 border border-white">
+              <tr>
+                <button @click="battle()" class="btn btn-dark btn-block">たたかう</button>
+              </tr>
+              <tr>
+                <button @click="spell()" class="btn btn-dark btn-block">じゅもん</button>
+              </tr>
+              <tr>
+                <button @click="escape()" class="btn btn-dark btn-block">にげる</button>
+              </tr>
+            </table>
+          </div>
+          <!-- バトルメッセージ -->
+          <div class="col-8 mt-2 text-left text-white">
+            <transition name="bounce">
+              <p v-if="show">{{ message }}</p>
+            </transition>
+            <p v-if="!show">{{ message }}</p>
+          </div>
+          <!-- <p v-if="show">{{ message }}</p> -->
+          <!-- <button @click="show = !show">Toggle show</button> -->
         </div>
-        <!-- <p v-if="show">{{ message }}</p> -->
-        <!-- <button @click="show = !show">Toggle show</button> -->
       </div>
     </div>
   </div>
