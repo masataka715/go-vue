@@ -10,14 +10,13 @@ type Auth struct {
 	Password     string `json:"password"`
 }
 
-//DB追加
 func Insert(emailAddress string, password string) {
 	db := database.Open()
 	db.Create(&Auth{EmailAddress: emailAddress, Password: password})
 	db.Close()
 }
 
-func AddID(auth Auth) Auth {
+func GetMatchingAuth(auth Auth) Auth {
 	db := database.Open()
 	newAuth := Auth{}
 	db.Where("email_address = ?", auth.EmailAddress).Where("password = ?", auth.Password).First(&newAuth)

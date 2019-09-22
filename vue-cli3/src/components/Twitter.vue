@@ -23,7 +23,7 @@
       </button>
       <p>{{ t.content }}</p>
       <div class="text-center">
-        <button @click="nice(t.id)" class="badge badge-secondary">
+        <button @click="nice(t.id)" class="badge badge-danger">
           いいね
           <span>{{ t.nice_count }}</span>
         </button>

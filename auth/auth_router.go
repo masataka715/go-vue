@@ -19,16 +19,14 @@ func Router(router *gin.Engine) {
 		var auth Auth
 		common.BindJSON(ctx, &auth)
 		Insert(auth.EmailAddress, auth.Password)
-		auth = AddID(auth)
+		auth = GetMatchingAuth(auth)
 		common.SubmitJson(ctx, auth)
-		// ユーザーIDを取得してセッションに保存
-		// session := sessions.Default(ctx)
-		// if session.Get("userID") != auth.ID {
-		// 	session.Set("userID", auth.ID)
-		// 	_ = session.Save()
-		// }
 	})
 
-	// router.GET("/auth/test", func(ctx *gin.Context) {
-	// })
+	router.POST("/login", func(ctx *gin.Context) {
+		var auth Auth
+		common.BindJSON(ctx, &auth)
+		auth = GetMatchingAuth(auth)
+		common.SubmitJson(ctx, auth)
+	})
 }
