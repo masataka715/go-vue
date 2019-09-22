@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="my-4">ツール</h1>
+    <h1 class="mt-0 mb-2">ツール</h1>
     <div v-if="is_auth">
       <Todo />
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="my-4">ゲーム</h1>
+    <h1 class="mt-0 mb-2">ゲーム</h1>
     <div class="text-center">
       <Battle/>
       <Shiritori/>
