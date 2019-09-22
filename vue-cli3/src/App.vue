@@ -10,12 +10,12 @@
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <router-link to="/" class="nav-item nav-link font-weight-bold">ホーム</router-link>
+        <router-link to="/note/all" class="nav-item nav-link font-weight-bold">ノート</router-link>
         <router-link to="/game" class="nav-item nav-link font-weight-bold">ゲーム</router-link>
         <router-link to="/tool" class="nav-item nav-link font-weight-bold">ツール</router-link>
       </div>
 
       <div v-if="is_auth" class="text-right">
-        <!-- <span class=" font-weight-bold bg-light">ログイン中</span> -->
         <span class="badge badge-secondary mr-3">ログイン中</span>
         <button @click="logout()" class="btn btn-primary">ログアウト</button>
       </div>
