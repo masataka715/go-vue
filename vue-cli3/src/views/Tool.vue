@@ -1,8 +1,12 @@
 <template>
   <div>
     <h1 class="my-4">ツール</h1>
-    <div class="text-center">
-      <Todo :goDomain="goDomain" />
+    <div v-if="is_auth">
+      <Todo />
+    </div>
+    <div v-if="!is_auth">
+      <p>ログインが必要です</p>
+      <button @click="testLogin()" class="btn btn-danger" type="button">テストでログイン</button>
     </div>
   </div>
 </template>
@@ -14,9 +18,21 @@ export default {
     Todo
   },
   data() {
-    return {
-      goDomain: "http://localhost:5000"
-    };
+    return {};
+  },
+  mounted: function() {},
+  computed: {
+    is_auth: {
+      get: function() {
+        return this.$store.getters.checkAuth;
+      }
+    }
+  },
+  methods: {
+    testLogin() {
+      window.sessionStorage.setItem(["user_id"], [9185491]);
+      this.$store.commit("login");
+    }
   }
 };
 </script>

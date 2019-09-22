@@ -44,7 +44,6 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["goDomain"],
   data() {
     return {
       member: {
@@ -54,7 +53,7 @@ export default {
       },
       enemy: "敵",
       message: "敵があらわれた！",
-      goUrl: this.goDomain + "/battle",
+      goUrl: this.$store.state.go_domain + "/battle",
       show: false
     };
   },

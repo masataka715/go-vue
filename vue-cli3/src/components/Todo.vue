@@ -74,7 +74,6 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["goDomain"],
   data() {
     return {
       todo: {
@@ -83,7 +82,7 @@ export default {
         status: "未実行"
       },
       todos: [],
-      goUrl: this.goDomain + "/todo",
+      goUrl: this.$store.state.go_domain + "/todo",
       editID: 0
     };
   },

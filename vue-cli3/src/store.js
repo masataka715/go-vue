@@ -1,0 +1,32 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+    state: {
+        is_auth: false,
+        go_domain: "http://localhost:5000"
+    },
+    getters: {
+        checkAuth: state => {
+            const session_id = window.sessionStorage.getItem(["user_id"]);
+            if (session_id) {
+                state.is_auth = true
+            } else {
+                state.is_auth = false
+            }
+            return state.is_auth
+        },
+    },
+    mutations: {
+        login(state) {
+            state.is_auth = true
+        },
+        logout(state) {
+            state.is_auth = false
+        },
+    },
+})
+// 生成したVueRouterインスタンスをエクスポート
+export default store

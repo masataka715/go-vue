@@ -7,6 +7,16 @@
         <router-link to="/game" class="nav-item nav-link font-weight-bold">ゲーム</router-link>
         <router-link to="/tool" class="nav-item nav-link font-weight-bold">ツール</router-link>
       </div>
+
+      <div v-if="is_auth" class="text-right font-weight-bold">
+        <small class="mr-2">ログイン中</small>
+        <button @click="logout()" class="btn btn-primary">ログアウト</button>
+      </div>
+      <div v-if="!is_auth" class="text-right">
+        <small class="mr-2">ログインしていません</small>
+        <button class="btn btn-primary">ログイン</button>
+        <button @click="testLogin()" class="btn btn-danger" type="button">テストでログイン</button>
+      </div>
     </nav>
     <!-- ここにパスと一致したコンポーネントが埋め込まれる -->
     <router-view />
@@ -19,8 +29,24 @@ export default {
   components: {},
   data() {
     return {
-      goDomain: "http://localhost:5000"
     };
+  },
+  computed: {
+    is_auth: {
+      get: function() {
+        return this.$store.getters.checkAuth;
+      }
+    }
+  },
+  methods: {
+    testLogin() {
+      window.sessionStorage.setItem(["user_id"], [9185491]);
+      this.$store.commit("login");
+    },
+    logout() {
+      window.sessionStorage.clear();
+      this.$store.commit("logout");
+    }
   }
 };
 </script>

@@ -35,7 +35,6 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["goDomain"],
   data() {
     return {
       twitter: {
@@ -44,7 +43,7 @@ export default {
         nice_count: 0
       },
       twitters: {},
-      goUrl: this.goDomain + "/twitter"
+      goUrl: this.$store.state.go_domain + "/twitter"
     };
   },
 

@@ -1,21 +1,21 @@
 <template>
   <div class="my-4 py-4 text-center" style="background-color: mintcream">
     <h2>認証機能</h2>
-    <div>
+    <div v-if="!is_register + !is_auth == 2">
       <div class="form-group row">
-        <label for="user_name" class="col-2 offset-1 col-form-label">ユーザー名</label>
+        <label for="email_address" class="col-3 offset-1 col-form-label">メールアドレス</label>
         <div class="col-6">
           <input
-            v-model="register.user_name"
-            type="text"
+            v-model="register.email_address"
+            type="email"
             class="form-control"
-            id="user_name"
-            placeholder="ユーザー名"
+            id="email_address"
+            placeholder="メールアドレス"
           />
         </div>
       </div>
       <div class="form-group row">
-        <label for="password" class="col-2 offset-1 col-form-label">パスワード</label>
+        <label for="password" class="col-3 offset-1 col-form-label">パスワード</label>
         <div class="col-6">
           <input
             v-model="register.password"
@@ -26,23 +26,34 @@
           />
         </div>
       </div>
-        <button @click="newRegister()">新規登録</button>
+      <button @click="newRegister()">新規登録</button>
     </div>
+    <!-- メッセージ -->
+    <div v-if="is_register" class="my-3">新規登録しました</div>
+    <div v-if="is_auth" class="my-3">ログイン中</div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  props: ["goDomain"],
   data() {
     return {
-      goUrl: this.goDomain + "/register",
+      goUrl: this.$store.state.go_domain + "/register",
       register: {
-        user_name: "",
+        id: 0,
+        email_address: "",
         password: ""
-      }
+      },
+      is_register: false
     };
+  },
+  computed: {
+    is_auth: {
+      get: function() {
+        return this.$store.getters.checkAuth;
+      }
+    }
   },
   methods: {
     newRegister() {
@@ -50,8 +61,9 @@ export default {
       axios
         .post(this.goUrl, json)
         .then(res => {
+          this.is_register = true;
           this.register = res.data;
-          console.log(this.register)
+          window.sessionStorage.setItem(["user_id"], [this.register.id]);
         })
         .catch(err => {
           console.log(err);

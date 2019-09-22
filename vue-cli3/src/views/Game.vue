@@ -2,8 +2,8 @@
   <div>
     <h1 class="my-4">ゲーム</h1>
     <div class="text-center">
-      <Battle :goDomain="goDomain" />
-      <Shiritori :goDomain="goDomain" />
+      <Battle/>
+      <Shiritori/>
     </div>
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
   },
   data() {
     return {
-      goDomain: "http://localhost:5000"
     };
   }
 };

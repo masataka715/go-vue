@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home'
 import Game from '@/views/Game'
 import Tool from '@/views/Tool'
-// Vuexと同様で最初にプラグインとして登録
+// 最初にプラグインとして登録
 Vue.use(VueRouter)
 // VueRouterインスタンスを生成する
 const router = new VueRouter({

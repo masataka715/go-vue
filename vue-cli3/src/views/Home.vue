@@ -2,8 +2,8 @@
   <div>
     <h1 class="my-4">ホーム</h1>
     <div class="text-center">
-      <Twitter :goDomain="goDomain" />
-      <Auth :goDomain="goDomain" />
+      <Twitter/>
+      <Auth/>
     </div>
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
   },
   data() {
     return {
-      goDomain: "http://localhost:5000"
     };
   }
 };

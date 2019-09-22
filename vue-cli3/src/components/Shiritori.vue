@@ -15,7 +15,6 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["goDomain"],
   data() {
     return {
       shiritori: {
@@ -23,7 +22,7 @@ export default {
         lastLetter: "",
         message: null
       },
-      goUrl: this.goDomain + "/shiri"
+      goUrl: this.$store.state.go_domain + "/shiri"
     };
   },
   methods: {
