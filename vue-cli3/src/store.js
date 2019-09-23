@@ -7,7 +7,8 @@ const store = new Vuex.Store({
     state: {
         is_auth: false,
         show_login_form: false,
-        go_domain: "http://localhost:5000"
+        go_domain: "http://localhost:5000",
+        test_auth_id: 9185491
     },
     getters: {
         checkAuth: state => {

@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div class="wrap-video position-relative">
-      <h1 class="title position-absolute">動画共有サイト</h1>
+      <h1 class="title position-absolute">ポートフォリオ</h1>
       <video autoplay loop muted src="./assets/vr.mp4" width="850" height="500">
       </video>
     </div>
@@ -10,7 +10,7 @@
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <router-link to="/" class="nav-item nav-link font-weight-bold">ホーム</router-link>
-        <router-link to="/note/all" class="nav-item nav-link font-weight-bold">ノート</router-link>
+        <router-link to="/note" class="nav-item nav-link font-weight-bold">ノート</router-link>
         <router-link to="/game" class="nav-item nav-link font-weight-bold">ゲーム</router-link>
         <router-link to="/tool" class="nav-item nav-link font-weight-bold">ツール</router-link>
       </div>
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     testLogin() {
-      window.sessionStorage.setItem(["user_id"], [9185491]);
+      window.sessionStorage.setItem(["user_id"], [this.$store.state.test_auth_id]);
       this.$store.commit("login");
     },
     login() {

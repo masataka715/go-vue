@@ -1,8 +1,13 @@
 <template>
   <div>
-    <h1 class="mt-0 mb-2">ツール</h1>
-    <div v-if="is_auth">
-      <Todo />
+    <h1 class="mt-0 mb-2">ノート</h1>
+    <div v-if="is_auth" class="row">
+      <div class="col-3 p-0 bg-dark" style="height:700px">
+        <NoteLeft />
+      </div>
+      <div class="col-9 p-0">
+        <router-view />
+      </div>
     </div>
     <div v-if="!is_auth">
       <p>ログインが必要です</p>
@@ -12,10 +17,10 @@
 </template>
 
 <script>
-import Todo from "./../components/Todo.vue";
+import NoteLeft from "./../../components/NoteLeft.vue";
 export default {
   components: {
-    Todo
+    NoteLeft
   },
   data() {
     return {};

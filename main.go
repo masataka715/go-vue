@@ -4,6 +4,7 @@ import (
 	"gortfolio/auth"
 	"gortfolio/battle"
 	"gortfolio/config"
+	"gortfolio/note"
 	"gortfolio/shiritori"
 	"gortfolio/todo"
 	"gortfolio/twitter"
@@ -29,6 +30,8 @@ func main() {
 	auth.Router(router)
 	// 戦闘シーン
 	battle.Router(router)
+	// ノート
+	note.Router(router)
 
 	_ = router.Run(":" + config.Config.Port)
 

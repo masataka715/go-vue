@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // ルート用のコンポーネントを読み込む
 import Home from '@/pages/Home'
+import NoteApp from '@/pages/Note/NoteApp'
 import AllNote from '@/pages/Note/AllNote'
+import NoteDetail from '@/pages/Note/NoteDetail'
 import NewNote from '@/pages/Note/NewNote'
 import NoteBook from '@/pages/Note/NoteBook'
 import Tag from '@/pages/Note/Tag'
@@ -19,10 +21,22 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: '/note/all',
-            component: AllNote,
+            path: '/note',
+            redirect: '/note/all',
+            component: NoteApp,
             // meta: { requireAuth: true},
             children: [
+                {
+                    path: '/note/all',
+                    component: AllNote,
+                    children: [
+                        {
+                            name: 'note_details',
+                            path: '/note/all/:id',
+                            component: NoteDetail
+                        }
+                    ]
+                },
                 {
                     path: '/note/new',
                     component: NewNote
