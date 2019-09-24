@@ -33,4 +33,13 @@ func Router(router *gin.Engine) {
 		note := GetOneNote(note_id)
 		common.SubmitJson(ctx, note)
 	})
+
+	router.POST("/note/details/", func(ctx *gin.Context) {
+		var note Note
+		common.BindJSON(ctx, &note)
+		log.Println(note)
+		Update(note)
+		log.Println(note)
+		common.SubmitJson(ctx, note)
+	})
 }

@@ -19,6 +19,16 @@ func Insert(note Note) {
 	db.Close()
 }
 
+func Update(new_note Note) {
+	db := database.Open()
+	var note Note
+	db.First(&note, new_note.ID)
+	note.Title = new_note.Title
+	note.Content = new_note.Content
+	db.Save(&note)
+	db.Close()
+}
+
 func GetAllNotes(auth_id int) []Note {
 	db := database.Open()
 	var notes []Note

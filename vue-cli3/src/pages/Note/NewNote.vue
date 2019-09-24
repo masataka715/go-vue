@@ -20,7 +20,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      goUrl: this.$store.state.go_domain + "/note/new",
+      go_url: this.$store.state.go_domain + "/note/new",
       note: {
         id: 0,
         auth_id: 0,
@@ -39,7 +39,7 @@ export default {
     newStore() {
       const json = JSON.stringify(this.note);
       axios
-        .post(this.goUrl, json)
+        .post(this.go_url, json)
         .then(res => {
           console.log(res.data);
         })
