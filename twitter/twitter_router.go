@@ -22,13 +22,13 @@ func Router(router *gin.Engine) {
 	})
 	// 削除
 	router.POST("/twitter/delete/:id", func(ctx *gin.Context) {
-		id := common.GetQueryID(ctx)
+		id := common.GetQueryID(ctx, "id")
 		Delete(id)
 		submitJson(ctx)
 	})
 	// いいね
 	router.POST("/twitter/nice/:id", func(ctx *gin.Context) {
-		id := common.GetQueryID(ctx)
+		id := common.GetQueryID(ctx, "id")
 		AddNice(id)
 		submitJson(ctx)
 	})

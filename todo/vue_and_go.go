@@ -29,7 +29,7 @@ func VueAndGo(router *gin.Engine) {
 	})
 	// 削除
 	router.POST("/todo/delete/:id", func(ctx *gin.Context) {
-		id := common.GetQueryID(ctx)
+		id := common.GetQueryID(ctx, "id")
 		Delete(id)
 		submitJson(ctx)
 	})

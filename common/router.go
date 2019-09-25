@@ -15,8 +15,8 @@ func BindJSON(ctx *gin.Context, i interface{}) {
 	}
 }
 
-func GetQueryID(ctx *gin.Context) int {
-	n := ctx.Param("id")
+func GetQueryID(ctx *gin.Context, param_name string) int {
+	n := ctx.Param(param_name)
 	id, err := strconv.Atoi(n)
 	if err != nil {
 		log.Println(err)

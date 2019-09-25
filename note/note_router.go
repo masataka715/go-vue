@@ -18,16 +18,16 @@ func Router(router *gin.Engine) {
 		common.SubmitJson(ctx, note)
 	})
 
-	router.GET("/note/all/:id", func(ctx *gin.Context) {
-		auth_id := common.GetQueryID(ctx)
+	router.GET("/note/all/:auth_id", func(ctx *gin.Context) {
+		auth_id := common.GetQueryID(ctx, "auth_id")
 		// 新規ノート保存待ち
 		time.Sleep(10 * time.Millisecond)
 		note := GetAllNotes(auth_id)
 		common.SubmitJson(ctx, note)
 	})
 
-	router.GET("/note/details/:id", func(ctx *gin.Context) {
-		note_id := common.GetQueryID(ctx)
+	router.GET("/note/details/:note_id", func(ctx *gin.Context) {
+		note_id := common.GetQueryID(ctx, "note_id")
 		note := GetOneNote(note_id)
 		common.SubmitJson(ctx, note)
 	})
@@ -41,14 +41,14 @@ func Router(router *gin.Engine) {
 
 	database.Migrate(Garbage{})
 
-	router.GET("/note/garbage_all/:id", func(ctx *gin.Context) {
-		auth_id := common.GetQueryID(ctx)
+	router.GET("/note/garbage_all/:auth_id", func(ctx *gin.Context) {
+		auth_id := common.GetQueryID(ctx, "auth_id")
 		garbages := GetGarbageAll(auth_id)
 		common.SubmitJson(ctx, garbages)
 	})
 
-	router.GET("/note/garbage/:id", func(ctx *gin.Context) {
-		note_id := common.GetQueryID(ctx)
+	router.GET("/note/garbage/:note_id", func(ctx *gin.Context) {
+		note_id := common.GetQueryID(ctx, "note_id")
 		note := NoteDel(note_id)
 		GarbageInsert(note)
 		notes := GetAllNotes(note.AuthID)
