@@ -6,6 +6,9 @@
           :to="{ name: 'note_details', params: {id: n.id}}"
           class="d-block text-decoration-none text-dark text-left px-3"
         >
+          <button @click="toGarbage(n.id)" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
           <p class="py-1 m-0 font-weight-bold">{{ n.title }}</p>
           <p class="pb-1 m-0" style="height: 50px; overflow: hidden;">{{ n.content }}</p>
         </router-link>
@@ -23,6 +26,7 @@ export default {
   data() {
     return {
       go_url: this.$store.state.go_domain + "/note/all/",
+      go_url2: this.$store.state.go_domain + "/note/garbage/",
       notes: []
     };
   },
@@ -40,6 +44,17 @@ export default {
       });
   },
   methods: {
+    toGarbage(note_id) {
+      const go_url2 = this.go_url2 + note_id;
+      axios
+        .get(go_url2)
+        .then(res => {
+          this.notes = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>

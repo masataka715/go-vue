@@ -7,7 +7,9 @@ import AllNote from '@/pages/Note/AllNote'
 import NoteDetail from '@/pages/Note/NoteDetail'
 import NewNote from '@/pages/Note/NewNote'
 import NoteBook from '@/pages/Note/NoteBook'
-import Tag from '@/pages/Note/Tag'
+import NoteTag from '@/pages/Note/NoteTag'
+import NoteGarbage from '@/pages/Note/NoteGarbage'
+import GarbageDetail from '@/pages/Note/GarbageDetail'
 import Game from '@/pages/Game'
 import Tool from '@/pages/Tool'
 // 最初にプラグインとして登録
@@ -47,7 +49,18 @@ const router = new VueRouter({
                 },
                 {
                     path: '/note/tag',
-                    component: Tag
+                    component: NoteTag
+                },
+                {
+                    path: '/note/garbage',
+                    component: NoteGarbage,
+                    children: [
+                        {
+                            name: 'garbage_details',
+                            path: '/note/garbage/:id',
+                            component: GarbageDetail
+                        }
+                    ]
                 },
             ]
         },

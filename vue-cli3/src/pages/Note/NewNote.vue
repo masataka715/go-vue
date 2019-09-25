@@ -40,9 +40,6 @@ export default {
       const json = JSON.stringify(this.note);
       axios
         .post(this.go_url, json)
-        .then(res => {
-          console.log(res.data);
-        })
         .catch(err => {
           console.log(err);
         });

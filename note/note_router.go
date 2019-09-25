@@ -3,7 +3,6 @@ package note
 import (
 	"gortfolio/common"
 	"gortfolio/common/database"
-	"log"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -15,7 +14,7 @@ func Router(router *gin.Engine) {
 	router.POST("/note/new", func(ctx *gin.Context) {
 		var note Note
 		common.BindJSON(ctx, &note)
-		Insert(note)
+		NoteInsert(note)
 		common.SubmitJson(ctx, note)
 	})
 
@@ -29,7 +28,6 @@ func Router(router *gin.Engine) {
 
 	router.GET("/note/details/:id", func(ctx *gin.Context) {
 		note_id := common.GetQueryID(ctx)
-		log.Println(note_id)
 		note := GetOneNote(note_id)
 		common.SubmitJson(ctx, note)
 	})
@@ -37,9 +35,23 @@ func Router(router *gin.Engine) {
 	router.POST("/note/details/", func(ctx *gin.Context) {
 		var note Note
 		common.BindJSON(ctx, &note)
-		log.Println(note)
-		Update(note)
-		log.Println(note)
+		NoteUpdate(note)
 		common.SubmitJson(ctx, note)
+	})
+
+	database.Migrate(Garbage{})
+
+	router.GET("/note/garbage_all/:id", func(ctx *gin.Context) {
+		auth_id := common.GetQueryID(ctx)
+		garbages := GetGarbageAll(auth_id)
+		common.SubmitJson(ctx, garbages)
+	})
+
+	router.GET("/note/garbage/:id", func(ctx *gin.Context) {
+		note_id := common.GetQueryID(ctx)
+		note := NoteDel(note_id)
+		GarbageInsert(note)
+		notes := GetAllNotes(note.AuthID)
+		common.SubmitJson(ctx, notes)
 	})
 }

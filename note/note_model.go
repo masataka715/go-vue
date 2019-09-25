@@ -13,13 +13,13 @@ type Note struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-func Insert(note Note) {
+func NoteInsert(note Note) {
 	db := database.Open()
 	db.Create(&Note{AuthID: note.AuthID, Title: note.Title, Content: note.Content})
 	db.Close()
 }
 
-func Update(new_note Note) {
+func NoteUpdate(new_note Note) {
 	db := database.Open()
 	var note Note
 	db.First(&note, new_note.ID)
@@ -27,6 +27,15 @@ func Update(new_note Note) {
 	note.Content = new_note.Content
 	db.Save(&note)
 	db.Close()
+}
+
+func NoteDel(id int) Note {
+	db := database.Open()
+	var note Note
+	db.First(&note, id)
+	db.Delete(&note)
+	db.Close()
+	return note
 }
 
 func GetAllNotes(auth_id int) []Note {
@@ -43,4 +52,26 @@ func GetOneNote(note_id int) Note {
 	db.Where("id = ?", note_id).First(&note)
 	db.Close()
 	return note
+}
+
+type Garbage struct {
+	ID        int       `json:"id"`
+	AuthID    int       `json:"auth_id"`
+	Title     string    `json:"title"`
+	Content   string    `json:"content"`
+	CreatedAt time.Time `json:"created_at"`
+}
+
+func GarbageInsert(note Note) {
+	db := database.Open()
+	db.Create(&Garbage{AuthID: note.AuthID, Title: note.Title, Content: note.Content})
+	db.Close()
+}
+
+func GetGarbageAll(auth_id int) []Garbage {
+	db := database.Open()
+	var garbages []Garbage
+	db.Where("auth_id = ?", auth_id).Order("created_at desc").Find(&garbages)
+	db.Close()
+	return garbages
 }

@@ -5,7 +5,7 @@
       <div class="col-3 p-0 bg-dark" style="height:700px">
         <NoteLeft />
       </div>
-      <div class="col-9 p-0">
+      <div class="col-8 p-0 ml-3">
         <router-view />
       </div>
     </div>
