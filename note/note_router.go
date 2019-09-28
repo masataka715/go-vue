@@ -62,9 +62,11 @@ func Router(router *gin.Engine) {
 		common.SubmitJson(ctx, garbage)
 	})
 
-	router.GET("/note/garbage_del/:garbage_id", func(ctx *gin.Context) {
+	router.GET("/note/garbage_del/:garbage_id/:auth_id", func(ctx *gin.Context) {
 		garbage_id := common.GetQueryID(ctx, "garbage_id")
 		GarbageDel(garbage_id)
-		// common.SubmitJson(ctx)
+		auth_id := common.GetQueryID(ctx, "auth_id")
+		garbages := GetGarbageAll(auth_id)
+		common.SubmitJson(ctx, garbages)
 	})
 }

@@ -1,14 +1,6 @@
 <template>
   <div>
     <div class="col p-0">
-      <div class="row">
-        <span class="col-7 text-primary mr-2 mb-0 p-0">{{ message }}</span>
-        <button
-          @click="garbageDel()"
-          class="col-4 mb-1 badge badge-pill badge-light"
-          style="outline: none;"
-        >完全に削除</button>
-      </div>
       <div class="text-left">
         <h4 class="col-11 m-0">{{ garbage.title }}</h4>
       </div>
@@ -23,7 +15,6 @@ export default {
   data() {
     return {
       go_url_details: this.$store.state.go_domain + "/note/garbage_details/",
-      go_url_del: this.$store.state.go_domain + "/note/garbage_del/",
       garbage: {},
       message: ""
     };
@@ -51,14 +42,6 @@ export default {
       });
   },
   methods: {
-    garbageDel() {
-      const garbage_del_url = this.go_url_del + this.$route.params.id;
-      console.log(garbage_del_url)
-      axios.get(garbage_del_url).catch(err => {
-        console.log(err);
-      });
-      location.reload();
-    }
   }
 };
 </script>

@@ -29,6 +29,7 @@ const router = new VueRouter({
             // meta: { requireAuth: true},
             children: [
                 {
+                    name: 'note_all',
                     path: '/note/all',
                     component: AllNote,
                     children: [

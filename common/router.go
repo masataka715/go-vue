@@ -10,7 +10,8 @@ import (
 
 func AccessDenyMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		if ctx.Request.Host != "localhost:5000" {
+		if ctx.Request.Referer() != config.Config.VueUrl+"/" {
+			log.Println(ctx.Request.Referer())
 			ctx.JSON(400, gin.H{"err": "Access denied"})
 			ctx.Abort()
 		}
