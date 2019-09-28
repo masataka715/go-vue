@@ -54,7 +54,6 @@ export default {
         .catch(err => {
           console.log(err);
         });
-        // location.reload();
         this.$router.push("/#/note/all");
     }
   }

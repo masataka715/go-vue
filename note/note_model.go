@@ -68,6 +68,12 @@ func GarbageInsert(note Note) {
 	db.Close()
 }
 
+func NoteRestore(garbage Garbage) {
+	db := database.Open()
+	db.Create(&Note{AuthID: garbage.AuthID, Title: garbage.Title, Content: garbage.Content})
+	db.Close()
+}
+
 func GarbageDel(garbage_id int) {
 	db := database.Open()
 	var garbage Garbage

@@ -53,6 +53,7 @@ const router = new VueRouter({
                     component: NoteTag
                 },
                 {
+                    name: 'note_garbage',
                     path: '/note/garbage',
                     component: NoteGarbage,
                     children: [
