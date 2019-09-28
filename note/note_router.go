@@ -10,6 +10,7 @@ import (
 
 func Router(router *gin.Engine) {
 	database.Migrate(Note{})
+	router.Use(common.AccessDenyMiddleware())
 
 	router.POST("/note/new", func(ctx *gin.Context) {
 		var note Note

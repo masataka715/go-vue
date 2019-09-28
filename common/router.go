@@ -8,6 +8,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func AccessDenyMiddleware() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		if ctx.Request.Host != "localhost:5000" {
+			ctx.JSON(400, gin.H{"err": "Access denied"})
+			ctx.Abort()
+		}
+	}
+}
+
 func BindJSON(ctx *gin.Context, i interface{}) {
 	err := ctx.BindJSON(&i)
 	if err != nil {
