@@ -68,10 +68,26 @@ func GarbageInsert(note Note) {
 	db.Close()
 }
 
+func GarbageDel(garbage_id int) {
+	db := database.Open()
+	var garbage Garbage
+	db.First(&garbage, garbage_id)
+	db.Delete(&garbage)
+	db.Close()
+}
+
 func GetGarbageAll(auth_id int) []Garbage {
 	db := database.Open()
 	var garbages []Garbage
 	db.Where("auth_id = ?", auth_id).Order("created_at desc").Find(&garbages)
 	db.Close()
 	return garbages
+}
+
+func GetOneGarbage(garbage_id int) Garbage {
+	db := database.Open()
+	var garbage Garbage
+	db.Where("id = ?", garbage_id).First(&garbage)
+	db.Close()
+	return garbage
 }

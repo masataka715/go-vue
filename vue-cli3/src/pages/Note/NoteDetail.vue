@@ -30,7 +30,7 @@ export default {
   watch: {
     // ルートの変更の検知
     $route(to) {
-      // go_urlは分けないと不都合
+      // go_url1と2は分けないと不都合
       const go_url1 = this.go_url + to.params.id;
       axios.get(go_url1).then(res => {
         this.note = res.data;

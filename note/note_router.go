@@ -54,4 +54,16 @@ func Router(router *gin.Engine) {
 		notes := GetAllNotes(note.AuthID)
 		common.SubmitJson(ctx, notes)
 	})
+
+	router.GET("/note/garbage_details/:garbage_id", func(ctx *gin.Context) {
+		garbage_id := common.GetQueryID(ctx, "garbage_id")
+		garbage := GetOneGarbage(garbage_id)
+		common.SubmitJson(ctx, garbage)
+	})
+
+	router.GET("/note/garbage_del/:garbage_id", func(ctx *gin.Context) {
+		garbage_id := common.GetQueryID(ctx, "garbage_id")
+		GarbageDel(garbage_id)
+		// common.SubmitJson(ctx)
+	})
 }

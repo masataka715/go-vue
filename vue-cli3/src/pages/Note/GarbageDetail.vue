@@ -2,17 +2,17 @@
   <div>
     <div class="col p-0">
       <div class="row">
-        <span class="col-5 offset-3 text-primary mr-2 mb-0 p-0">{{ message }}</span>
+        <span class="col-7 text-primary mr-2 mb-0 p-0">{{ message }}</span>
         <button
-          @click="noteDel()"
-          class="col-2 mb-1 badge badge-pill badge-light"
+          @click="garbageDel()"
+          class="col-4 mb-1 badge badge-pill badge-light"
           style="outline: none;"
-        >削除</button>
+        >完全に削除</button>
       </div>
       <div class="text-left">
-        <h4 class="col-11 m-0">{{ note.title }}</h4>
+        <h4 class="col-11 m-0">{{ garbage.title }}</h4>
       </div>
-      <p class="col-11 m-0 d-block">{{ note.content}}</p>
+      <p class="col-11 m-0 d-block">{{ garbage.content}}</p>
     </div>
   </div>
 </template>
@@ -22,37 +22,42 @@ import axios from "axios";
 export default {
   data() {
     return {
-      go_url: this.$store.state.go_domain + "/note/details/",
-      note: {},
+      go_url_details: this.$store.state.go_domain + "/note/garbage_details/",
+      go_url_del: this.$store.state.go_domain + "/note/garbage_del/",
+      garbage: {},
       message: ""
     };
   },
   watch: {
     // ルートの変更の検知
     $route(to) {
-      // go_urlは分けないと不都合
-      const go_url1 = this.go_url + to.params.id;
-      axios.get(go_url1).then(res => {
-        this.note = res.data;
+      // go_url1と2は分けないと不都合
+      const garbage_details_url = this.go_url_details + to.params.id;
+      axios.get(garbage_details_url).then(res => {
+        this.garbage = res.data;
       });
       this.message = "";
     }
   },
   mounted: function() {
-    const go_url2 = this.go_url + this.$route.params.id;
+    const garbage_details_url2 = this.go_url_details + this.$route.params.id;
     axios
-      .get(go_url2)
+      .get(garbage_details_url2)
       .then(res => {
-        this.note = res.data;
+        this.garbage = res.data;
       })
       .catch(err => {
         console.log(err);
       });
   },
   methods: {
-    noteDel() {
-      console.log("工事中")
-      
+    garbageDel() {
+      const garbage_del_url = this.go_url_del + this.$route.params.id;
+      console.log(garbage_del_url)
+      axios.get(garbage_del_url).catch(err => {
+        console.log(err);
+      });
+      location.reload();
     }
   }
 };
