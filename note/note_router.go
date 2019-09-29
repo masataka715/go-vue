@@ -11,7 +11,17 @@ import (
 func Router(router *gin.Engine) {
 	database.Migrate(Note{})
 	router.Use(common.AccessDenyMiddleware())
+	noteRouter(router)
 
+	database.Migrate(Garbage{})
+	garbageRouter(router)
+
+	database.Migrate(Tag{})
+	tagRouter(router)
+
+}
+
+func noteRouter(router *gin.Engine) {
 	router.POST("/note/new", func(ctx *gin.Context) {
 		var note Note
 		common.BindJSON(ctx, &note)
@@ -38,46 +48,5 @@ func Router(router *gin.Engine) {
 		common.BindJSON(ctx, &note)
 		NoteUpdate(note)
 		common.SubmitJson(ctx, note)
-	})
-
-	database.Migrate(Garbage{})
-
-	router.GET("/note/garbage_all/:auth_id", func(ctx *gin.Context) {
-		auth_id := common.GetQueryID(ctx, "auth_id")
-		garbages := GetGarbageAll(auth_id)
-		common.SubmitJson(ctx, garbages)
-	})
-
-	router.GET("/note/garbage/:note_id", func(ctx *gin.Context) {
-		note_id := common.GetQueryID(ctx, "note_id")
-		note := NoteDel(note_id)
-		GarbageInsert(note)
-		notes := GetAllNotes(note.AuthID)
-		common.SubmitJson(ctx, notes)
-	})
-
-	router.GET("/note/garbage_details/:garbage_id", func(ctx *gin.Context) {
-		garbage_id := common.GetQueryID(ctx, "garbage_id")
-		garbage := GetOneGarbage(garbage_id)
-		common.SubmitJson(ctx, garbage)
-	})
-
-	router.GET("/note/garbage_restore/:garbage_id/:auth_id", func(ctx *gin.Context) {
-		garbage_id := common.GetQueryID(ctx, "garbage_id")
-		garbage := GetOneGarbage(garbage_id)
-		NoteRestore(garbage)
-		GarbageDel(garbage_id)
-
-		auth_id := common.GetQueryID(ctx, "auth_id")
-		garbages := GetGarbageAll(auth_id)
-		common.SubmitJson(ctx, garbages)
-	})
-
-	router.GET("/note/garbage_del/:garbage_id/:auth_id", func(ctx *gin.Context) {
-		garbage_id := common.GetQueryID(ctx, "garbage_id")
-		GarbageDel(garbage_id)
-		auth_id := common.GetQueryID(ctx, "auth_id")
-		garbages := GetGarbageAll(auth_id)
-		common.SubmitJson(ctx, garbages)
 	})
 }
