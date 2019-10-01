@@ -1,8 +1,8 @@
 package twitter
 
 import (
-	"gortfolio/common"
-	"gortfolio/common/database"
+	"gortfolio/pkg/common"
+	"gortfolio/pkg/common/database"
 
 	"github.com/gin-gonic/gin"
 )

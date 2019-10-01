@@ -1,8 +1,8 @@
 package note
 
 import (
-	"gortfolio/common"
-	"gortfolio/common/database"
+	"gortfolio/pkg/common"
+	"gortfolio/pkg/common/database"
 	"time"
 
 	"github.com/gin-gonic/gin"

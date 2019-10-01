@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"gortfolio/common/database"
+	"gortfolio/pkg/common/database"
 )
 
 type Auth struct {

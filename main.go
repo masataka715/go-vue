@@ -1,13 +1,13 @@
 package main
 
 import (
-	"gortfolio/auth"
-	"gortfolio/battle"
 	"gortfolio/config"
-	"gortfolio/note"
-	"gortfolio/shiritori"
-	"gortfolio/todo"
-	"gortfolio/twitter"
+	"gortfolio/pkg/auth"
+	"gortfolio/pkg/battle"
+	"gortfolio/pkg/note"
+	"gortfolio/pkg/shiritori"
+	"gortfolio/pkg/todo"
+	"gortfolio/pkg/twitter"
 	"gortfolio/utils"
 
 	"github.com/gin-gonic/gin"

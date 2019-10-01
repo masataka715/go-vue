@@ -1,7 +1,7 @@
 package todo
 
 import (
-	"gortfolio/common/database"
+	"gortfolio/pkg/common/database"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

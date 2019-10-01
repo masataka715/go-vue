@@ -1,7 +1,7 @@
 package note
 
 import (
-	"gortfolio/common/database"
+	"gortfolio/pkg/common/database"
 	"time"
 )
 

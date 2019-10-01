@@ -1,7 +1,7 @@
 package note
 
 import (
-	"gortfolio/common"
+	"gortfolio/pkg/common"
 	"log"
 
 	"github.com/gin-gonic/gin"

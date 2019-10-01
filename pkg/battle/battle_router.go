@@ -1,8 +1,8 @@
 package battle
 
 import (
-	"gortfolio/common"
 	"gortfolio/config"
+	"gortfolio/pkg/common"
 
 	"github.com/gin-gonic/gin"
 )

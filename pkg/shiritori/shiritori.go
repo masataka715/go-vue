@@ -1,8 +1,8 @@
 package shiritori
 
 import (
-	"gortfolio/common"
 	"gortfolio/config"
+	"gortfolio/pkg/common"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"
