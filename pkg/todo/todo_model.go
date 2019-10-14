@@ -1,7 +1,7 @@
 package todo
 
 import (
-	"gortfolio/pkg/common/database"
+	"go_vue/pkg/common/database"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3" //忘れずに！

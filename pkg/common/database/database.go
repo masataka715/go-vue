@@ -1,7 +1,7 @@
 package database
 
 import (
-	"gortfolio/config"
+	"go_vue/config"
 	"log"
 
 	"github.com/jinzhu/gorm"

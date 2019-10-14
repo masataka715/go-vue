@@ -1,7 +1,7 @@
 package note
 
 import (
-	"gortfolio/pkg/common/database"
+	"go_vue/pkg/common/database"
 	"time"
 )
 

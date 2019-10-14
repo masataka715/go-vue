@@ -1,7 +1,7 @@
 package note
 
 import (
-	"gortfolio/pkg/common"
+	"go_vue/pkg/common"
 	"log"
 
 	"github.com/gin-gonic/gin"

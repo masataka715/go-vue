@@ -1,14 +1,14 @@
 package main
 
 import (
-	"gortfolio/config"
-	"gortfolio/pkg/auth"
-	"gortfolio/pkg/battle"
-	"gortfolio/pkg/note"
-	"gortfolio/pkg/shiritori"
-	"gortfolio/pkg/todo"
-	"gortfolio/pkg/twitter"
-	"gortfolio/utils"
+	"go_vue/config"
+	"go_vue/pkg/auth"
+	"go_vue/pkg/battle"
+	"go_vue/pkg/note"
+	"go_vue/pkg/shiritori"
+	"go_vue/pkg/todo"
+	"go_vue/pkg/twitter"
+	"go_vue/utils"
 
 	"github.com/gin-gonic/gin"
 )

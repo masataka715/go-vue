@@ -1,7 +1,7 @@
 package common
 
 import (
-	"gortfolio/config"
+	"go_vue/config"
 	"log"
 	"strconv"
 

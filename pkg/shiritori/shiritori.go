@@ -1,8 +1,8 @@
 package shiritori
 
 import (
-	"gortfolio/config"
-	"gortfolio/pkg/common"
+	"go_vue/config"
+	"go_vue/pkg/common"
 	"unicode/utf8"
 
 	"github.com/gin-gonic/gin"

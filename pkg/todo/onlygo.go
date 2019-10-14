@@ -1,7 +1,7 @@
 package todo
 
 import (
-	"gortfolio/pkg/common/database"
+	"go_vue/pkg/common/database"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

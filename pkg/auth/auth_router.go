@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"gortfolio/pkg/common"
-	"gortfolio/pkg/common/database"
+	"go_vue/pkg/common"
+	"go_vue/pkg/common/database"
 
 	"github.com/gin-gonic/gin"
 )

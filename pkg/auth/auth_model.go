@@ -1,8 +1,6 @@
 package auth
 
-import (
-	"gortfolio/pkg/common/database"
-)
+import "go_vue/pkg/common/database"
 
 type Auth struct {
 	ID           int    `json:"id"`
